@@ -1,4 +1,7 @@
 <?php
+
+namespace geoPHP\Geometry;
+
 /**
  * MultiPoint: A collection Points  
  */

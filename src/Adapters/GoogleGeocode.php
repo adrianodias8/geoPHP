@@ -1,4 +1,14 @@
 <?php
+
+namespace geoPHP\Adapters;
+use Exception;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\MultiPoint;
+use geoPHP\Geometry\MultiPolygon;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+
 /*
  * (c) Camptocamp <info@camptocamp.com>
  * (c) Patrick Hayes
@@ -112,10 +122,10 @@ class GoogleGeocode extends GeoAdapter
 
     // result->status is not 'OK', so throw exception
     if ($this->result->status) {
-      throw new \Exception('Error in Google Reverse Geocoder: '.$this->result->status);
+      throw new Exception('Error in Google Reverse Geocoder: '.$this->result->status);
     }
     else {
-      throw new \Exception('Unknown error in Google Reverse Geocoder');
+      throw new Exception('Unknown error in Google Reverse Geocoder');
     }
   }
 

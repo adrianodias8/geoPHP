@@ -1,4 +1,17 @@
 <?php
+
+namespace geoPHP\Adapters;
+use Exception;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\GeometryCollection;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\MultiLineString;
+use geoPHP\Geometry\MultiPoint;
+use geoPHP\Geometry\MultiPolygon;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+use geoPHP\geoPHP;
+
 /**
  * GeoJSON class : a geojson reader/writer.
  *

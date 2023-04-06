@@ -1,4 +1,16 @@
 <?php
+
+namespace geoPHP\Adapters;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\GeometryCollection;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\MultiLineString;
+use geoPHP\Geometry\MultiPoint;
+use geoPHP\Geometry\MultiPolygon;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+use geoPHP\geoPHP;
+
 /**
  * WKT (Well Known Text) Adapter
  */
@@ -26,18 +38,18 @@ class WKT extends GeoAdapter
       $srid = NULL;
     }
 
-    // If geos is installed, then we take a shortcut and let it parse the WKT
-    if (geoPHP::geosInstalled()) {
-      $reader = new GEOSWKTReader();
-      if ($srid) {
-        $geom = geoPHP::geosToGeometry($reader->read($wkt));
-        $geom->setSRID($srid);
-        return $geom;
-      }
-      else {
-        return geoPHP::geosToGeometry($reader->read($wkt));
-      }
-    }
+    // // If geos is installed, then we take a shortcut and let it parse the WKT
+    // if (geoPHP::geosInstalled()) {
+    //   $reader = new GEOSWKTReader();
+    //   if ($srid) {
+    //     $geom = geoPHP::geosToGeometry($reader->read($wkt));
+    //     $geom->setSRID($srid);
+    //     return $geom;
+    //   }
+    //   else {
+    //     return geoPHP::geosToGeometry($reader->read($wkt));
+    //   }
+    // }
     $wkt = str_replace(', ', ',', $wkt);
 
     // For each geometry type, check to see if we have a match at the
@@ -212,12 +224,12 @@ class WKT extends GeoAdapter
    * @return string The WKT string representation of the input geometries
    */
   public function write(Geometry $geometry) {
-    // If geos is installed, then we take a shortcut and let it write the WKT
-    if (geoPHP::geosInstalled()) {
-      $writer = new GEOSWKTWriter();
-      $writer->setTrim(TRUE);
-      return $writer->write($geometry->geos());
-    }
+    // // If geos is installed, then we take a shortcut and let it write the WKT
+    // if (geoPHP::geosInstalled()) {
+    //   $writer = new GEOSWKTWriter();
+    //   $writer->setTrim(TRUE);
+    //   return $writer->write($geometry->geos());
+    // }
 
     if ($geometry->isEmpty()) {
       return strtoupper($geometry->geometryType()).' EMPTY';

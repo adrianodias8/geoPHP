@@ -1,4 +1,15 @@
 <?php
+
+namespace geoPHP\Adapters;
+use DOMDocument;
+use Exception;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\GeometryCollection;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+use geoPHP\geoPHP;
+
 /*
  * Copyright (c) Patrick Hayes
  * Copyright (c) 2010-2011, Arnaud Renevier

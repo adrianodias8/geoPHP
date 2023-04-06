@@ -1,4 +1,10 @@
 <?php
+
+namespace geoPHP\Adapters;
+use DOMDocument;
+use Exception;
+use Geometry;
+
 /*
  * Copyright (c) Patrick Hayes
  *
@@ -20,7 +26,7 @@ class GPX extends GeoAdapter
    *
    * @param string $gpx A GPX string
    *
-   * @return Geometry|GeometryCollection
+   * @return \geoPHP\Geometry\Geometry|\geoPHP\Geometry\GeometryCollection
    */
   public function read($gpx) {
     return $this->geomFromText($gpx);
@@ -29,7 +35,7 @@ class GPX extends GeoAdapter
   /**
    * Serialize geometries into a GPX string.
    *
-   * @param Geometry $geometry
+   * @param \geoPHP\Geometry\Geometry $geometry
    *
    * @return string The GPX string representation of the input geometries
    */

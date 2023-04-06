@@ -1,36 +1,34 @@
 <?php
-/*
- * (c) Patrick Hayes
- *
- * This code is open-source and licenced under the Modified BSD License.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
-// Adapters
-include_once("lib/adapters/GeoAdapter.class.php"); // Abtract class
-include_once("lib/adapters/GeoJSON.class.php");
-include_once("lib/adapters/EsriJSON.class.php");
-include_once("lib/adapters/WKT.class.php");
-include_once("lib/adapters/EWKT.class.php");
-include_once("lib/adapters/WKB.class.php");
-include_once("lib/adapters/EWKB.class.php");
-include_once("lib/adapters/KML.class.php");
-include_once("lib/adapters/GPX.class.php");
-include_once("lib/adapters/GeoRSS.class.php");
-include_once("lib/adapters/GoogleGeocode.class.php");
-include_once("lib/adapters/GeoHash.class.php");
+namespace geoPHP;
+use Exception;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\GeometryCollection;
 
-// Geometries
-include_once("lib/geometry/Geometry.class.php"); // Abtract class
-include_once("lib/geometry/Point.class.php");
-include_once("lib/geometry/Collection.class.php"); // Abtract class
-include_once("lib/geometry/LineString.class.php");
-include_once("lib/geometry/MultiPoint.class.php");
-include_once("lib/geometry/Polygon.class.php");
-include_once("lib/geometry/MultiLineString.class.php");
-include_once("lib/geometry/MultiPolygon.class.php");
-include_once("lib/geometry/GeometryCollection.class.php");
+// // Adapters
+// include_once("lib/adapters/GeoAdapter.class.php"); // Abtract class
+// include_once("lib/adapters/GeoJSON.class.php");
+// include_once("lib/adapters/EsriJSON.class.php");
+// include_once("lib/adapters/WKT.class.php");
+// include_once("lib/adapters/EWKT.class.php");
+// include_once("lib/adapters/WKB.class.php");
+// include_once("lib/adapters/EWKB.class.php");
+// include_once("lib/adapters/KML.class.php");
+// include_once("lib/adapters/GPX.class.php");
+// include_once("lib/adapters/GeoRSS.class.php");
+// include_once("lib/adapters/GoogleGeocode.class.php");
+// include_once("lib/adapters/GeoHash.class.php");
+
+// // Geometries
+// include_once("lib/geometry/Geometry.class.php"); // Abtract class
+// include_once("lib/geometry/Point.class.php");
+// include_once("lib/geometry/Collection.class.php"); // Abtract class
+// include_once("lib/geometry/LineString.class.php");
+// include_once("lib/geometry/MultiPoint.class.php");
+// include_once("lib/geometry/Polygon.class.php");
+// include_once("lib/geometry/MultiLineString.class.php");
+// include_once("lib/geometry/MultiPolygon.class.php");
+// include_once("lib/geometry/GeometryCollection.class.php");
 
 class geoPHP
 {
@@ -70,9 +68,10 @@ class geoPHP
       $processor_type = $type_map[$type];
     }
     else {
-      throw new exception('geoPHP could not find an adapter of type '.htmlentities($type));
+      throw new Exception('geoPHP could not find an adapter of type '.htmlentities($type));
     }
 
+    $processor_type = "geoPHP\\Adapters\\".$type_map[$type];
     $processor = new $processor_type();
 
     // Data is not an array, just pass it normally
@@ -121,28 +120,28 @@ class geoPHP
     );
   }
 
-  static function geosInstalled($force = NULL) {
-    static $geos_installed = NULL;
-    if ($force !== NULL) $geos_installed = $force;
-    if ($geos_installed !== NULL) {
-      return $geos_installed;
-    }
-    $geos_installed = class_exists('GEOSGeometry');
-    return $geos_installed;
-  }
+  // static function geosInstalled($force = NULL) {
+  //   static $geos_installed = NULL;
+  //   if ($force !== NULL) $geos_installed = $force;
+  //   if ($geos_installed !== NULL) {
+  //     return $geos_installed;
+  //   }
+  //   $geos_installed = class_exists('GEOSGeometry');
+  //   return $geos_installed;
+  // }
 
-  static function geosToGeometry($geos) {
-    if (!geoPHP::geosInstalled()) {
-      return NULL;
-    }
-    $wkb_writer = new GEOSWKBWriter();
-    $wkb = $wkb_writer->writeHEX($geos);
-    $geometry = geoPHP::load($wkb, 'wkb', TRUE);
-    if ($geometry) {
-      $geometry->setGeos($geos);
-      return $geometry;
-    }
-  }
+  // static function geosToGeometry($geos) {
+  //   if (!geoPHP::geosInstalled()) {
+  //     return NULL;
+  //   }
+  //   $wkb_writer = new GEOSWKBWriter();
+  //   $wkb = $wkb_writer->writeHEX($geos);
+  //   $geometry = geoPHP::load($wkb, 'wkb', TRUE);
+  //   if ($geometry) {
+  //     $geometry->setGeos($geos);
+  //     return $geometry;
+  //   }
+  // }
 
   // Reduce a geometry, or an array of geometries, into their 'lowest' available common geometry.
   // For example a GeometryCollection of only points will become a MultiPoint

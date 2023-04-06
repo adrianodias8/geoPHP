@@ -1,5 +1,10 @@
 <?php
 
+namespace geoPHP\Geometry;
+
+use Exception;
+use geoPHP;
+
 /**
  * Collection: Abstract class for compound geometries
  *

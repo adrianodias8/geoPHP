@@ -1,4 +1,16 @@
 <?php
+
+namespace geoPHP\Adapters;
+use Exception;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\GeometryCollection;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\MultiLineString;
+use geoPHP\Geometry\MultiPoint;
+use geoPHP\Geometry\MultiPolygon;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+
 /*
  * (c) Patrick Hayes
  *
@@ -26,7 +38,7 @@ class WKB extends GeoAdapter
    * @param bool $is_hex_string
    *   If this is a hexedecimal string that is in need of packing
    *
-   * @return Geometry
+   * @return \geoPHP\Geometry\Geometry
    */
   public function read($wkb, $is_hex_string = FALSE) {
     if ($is_hex_string) {

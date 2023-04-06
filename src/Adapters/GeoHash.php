@@ -1,4 +1,11 @@
 <?php
+
+namespace geoPHP\Adapters;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+
 /**
  * PHP Geometry GeoHash encoder/decoder.
  *
@@ -67,7 +74,7 @@ class GeoHash extends GeoAdapter{
 
   /**
    * Convert the geohash to a Point. The point is 2-dimensional.
-   * @return Point the converted geohash
+   * @return Point|Polygon the converted geohash
    * @param string $hash a geohash
    * @see GeoAdapter::read()
    */

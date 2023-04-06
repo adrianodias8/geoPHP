@@ -1,4 +1,14 @@
 <?php
+
+namespace geoPHP\Adapters;
+use DOMDocument;
+use Exception;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+use geoPHP\geoPHP;
+
 /*
  * Copyright (c) Patrick Hayes
  *
@@ -196,7 +206,8 @@ class GeoRSS extends GeoAdapter
         return $this->collectionToGeoRSS($geom);
         break;
     }
-    return $output;
+    //return $output;
+    return null;
   }
   
   private function pointToGeoRSS($geom) {

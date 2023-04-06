@@ -1,5 +1,8 @@
 <?php
 
+namespace geoPHP\Geometry;
+use geoPHP;
+
 /**
  * Geometry abstract class
  */
@@ -88,8 +91,9 @@ abstract class Geometry
     $args = func_get_args();
 
     $format = array_shift($args);
-    $type_map = geoPHP::getAdapterMap();
+    $type_map = \geoPHP\geoPHP::getAdapterMap();
     $processor_type = $type_map[$format];
+    $processor_type = "\\geoPHP\\Adapters\\".$type_map[$format];
     $processor = new $processor_type();
 
     array_unshift($args, $this);
@@ -140,6 +144,7 @@ abstract class Geometry
   // Public: GEOS Only Functions
   // ---------------------------
   public function geos() {
+    return false;
     // If it's already been set, just return it
     if ($this->geos && geoPHP::geosInstalled()) {
       return $this->geos;

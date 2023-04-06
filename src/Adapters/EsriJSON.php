@@ -1,5 +1,15 @@
 <?php
 
+namespace geoPHP\Adapters;
+use Exception;
+use geoPHP\Geometry\Geometry;
+use geoPHP\Geometry\LineString;
+use geoPHP\Geometry\MultiLineString;
+use geoPHP\Geometry\MultiPoint;
+use geoPHP\Geometry\MultiPolygon;
+use geoPHP\Geometry\Point;
+use geoPHP\Geometry\Polygon;
+
 /**
  * EsriJSON class : a esrijson/argcis reader/writer.
  *
@@ -511,7 +521,7 @@ class EsriJSON extends GeoAdapter {
       // Hole does not intersect ANY outer ring at this point.
       // Make it an outer ring.
       if (!$intersects) {
-        array_push($outerRings, array(array_reverse(hole)));
+        array_push($outerRings, array(array_reverse($hole)));
       }
     }
 
